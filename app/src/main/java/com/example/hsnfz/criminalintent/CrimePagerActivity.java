@@ -23,7 +23,6 @@ public class CrimePagerActivity extends AppCompatActivity {
     private static final String EXTRA_CRIME_ID = "criminalintent.crime_id";
     private ViewPager mViewPager;
     private List<Crime> mCrimes;
-    private TabLayout mtabLayout;
     private Button btnfirst;
     private Button btnlast;
 
@@ -35,18 +34,12 @@ public class CrimePagerActivity extends AppCompatActivity {
         final UUID crimeId = (UUID) getIntent().getSerializableExtra(EXTRA_CRIME_ID);
 
         mViewPager = (ViewPager) findViewById(R.id.crime_view_pager);
-        mtabLayout = findViewById(R.id.tablayout);
         btnfirst = findViewById(R.id.first_crime);
         btnlast = findViewById(R.id.last_crime);
         mCrimes = CrimeLab.get(this).getmCrimes();
 
         initListner();
-        ViewPageAdapter adapter = new ViewPageAdapter(getSupportFragmentManager());
-        adapter.AddFragment(new CrimeFragment(),"Crime # 0");
 
-
-        mViewPager.setAdapter(adapter);
-        mtabLayout.setupWithViewPager(mViewPager);
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
             @Override
